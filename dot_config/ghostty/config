@@ -1,0 +1,50 @@
+#############################################################
+# ℹ️ Reminder: You can reload the config with `cmd+shift+,` #
+# `ghostty +show-config --default --docs`
+#############################################################
+
+shell-integration = zsh
+
+# 🪟 Window
+
+# macos-titlebar-style = hidden
+background-opacity = 0.95
+background-blur-radius = 20
+window-save-state = always
+window-height = 14
+window-width = 180
+window-padding-balance = true
+window-colorspace = display-p3
+mouse-scroll-multiplier = 2
+mouse-hide-while-typing = true
+
+# 📝 Font
+
+font-size = 20
+font-thicken = true
+adjust-cell-height = 50%
+
+# 📋 Clipboard
+
+clipboard-read = allow
+clipboard-write = allow
+copy-on-select = false
+
+# 📍 Cursor
+
+cursor-color = #eaeaea
+cursor-style = bar
+adjust-cursor-thickness = 50%
+cursor-color = #5cf19e
+
+# 🪶 Quick Terminal
+
+keybind = global:cmd+opt+grave_accent=toggle_quick_terminal
+quick-terminal-position = bottom
+quick-terminal-animation-duration = 0.06
+quick-terminal-autohide = true
+
+# 🎨 Theme 
+
+theme = Catppuccin Mocha
+bold-is-bright = true
