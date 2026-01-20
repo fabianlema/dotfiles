@@ -20,7 +20,7 @@ mouse-hide-while-typing = true
 
 # 📝 Font
 
-font-size = 20
+font-size = 14
 font-thicken = true
 adjust-cell-height = 50%
 
