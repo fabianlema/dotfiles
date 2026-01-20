@@ -1,0 +1,42 @@
+[user]
+	name = Fabián Lema Pérez 
+	email = lema.perez.fabian@gmail.com
+[color]
+	ui = true
+	diff = true
+	status = true
+	branch = true
+[alias]
+	p = push
+  pf = push --force-with-lease
+  pr = pull --rebase
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+	df = diff
+	dfw = diff --word-diff
+	lc = log --stat --color -p
+  ll = log --graph --pretty='%C(yellow)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	graph = log --graph --decorate --all
+	dt = difftool
+	# Shows a list of branches sorted by last change. Useful when you have a lot
+	#   # of branches with similar names and you're not sure anymore which branch is
+	#     # the right now.
+	brl = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[push]
+	default = simple
+[core]
+	editor = nvim
+[rerere]
+[rerere]
+	enabled = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
