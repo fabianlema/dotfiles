@@ -48,3 +48,6 @@ quick-terminal-autohide = true
 
 theme = Catppuccin Mocha
 bold-is-bright = true
+
+# Session
+window-save-state = never
