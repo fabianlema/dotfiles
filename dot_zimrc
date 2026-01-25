@@ -28,6 +28,15 @@ zmodule romkatv/zsh-defer
 
 # Custom Git
 zmodule $HOME/.config/zsh/modules/cgit
+
+# Custom Work
+zmodule $HOME/.config/zsh/modules/work
+
+# Custom TuLotero Web
+zmodule $HOME/.config/zsh/modules/tw
+
+# Custom TuLotero Web Landing
+zmodule $HOME/.config/zsh/modules/twl
 #
 # Prompt
 #

@@ -1,0 +1,6 @@
+alias cdtw='cd ~/TuLotero/tulotero-web/'
+alias yicse='yi && y cli:serve:es'
+alias yicsm='yi && y cli:serve:mx'
+alias yicco='yi && y cli:serve:co'
+alias yicpt='yi && y cli:serve:pt'
+alias yicus='yi && y cli:serve:us'
