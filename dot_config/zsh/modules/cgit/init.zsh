@@ -64,35 +64,81 @@ alias gpl='git pull'
 alias gcl='git restore --staged . && git restore . && git clean -fd'
 # --- Git Worktrees Utils ---
 
-# Función interna para clonar con estructura bare
+# Internal function to clone repository with bare structure
 function __gclone_wt() {
   url=$1
-  # Si no hay segundo argumento, usa el nombre del repo
+  # Use repo name if no folder argument is provided
   dir=${2:-$(basename "$url" .git)}
 
-  echo "🏗️  Creando estructura Worktree en: $dir..."
+  echo "🏗️  Creating Worktree structure for: $dir..."
 
   mkdir "$dir"
   cd "$dir"
 
-  # 1. Clonar bare
+  # 1. Clone as bare repository
   git clone --bare "$url" .git
 
-  # 2. Configurar fetch
+  # 2. Configure fetch to ensure all remote branches are visible
   git config --local remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 
-  # 3. Checkout de rama principal
+  # 3. Attempt to checkout 'main' or 'master'
   if git show-ref --verify --quiet refs/heads/main; then
       git worktree add main
   elif git show-ref --verify --quiet refs/heads/master; then
       git worktree add master
   else
-      echo "⚠️ No se detectó main/master. Crea el worktree manualmente."
+      echo "⚠️ 'main' or 'master' not found. You need to create the worktree manually."
   fi
 
-  echo "✅ Repo listo. Entra en $dir/main"
+  echo "✅ Repo ready. Enter via: cd $dir/main"
 }
 
-# gclwt: Clona un repo nuevo con estructura worktree
-# Uso: gclwt <url> [nombre-carpeta]
+# Internal function to add a new worktree and copy node_modules if available
+function __gw_co() {
+    local dir_name=$1
+    local branch_name=${2:-$1}
+    
+    # Create the worktree
+    echo "🌿 Creating worktree: $dir_name..."
+    git worktree add "$dir_name" "$branch_name"
+    
+    # Define source for node_modules (looking into main or master)
+    # Assumes execution from project root
+    #local src_modules=""
+    #if [ -d "main/node_modules" ]; then
+    #   src_modules="main/node_modules"
+    #elif [ -d "master/node_modules" ]; then
+    #    src_modules="master/node_modules"
+    #fi
+
+    # Copy node_modules using rsync if found to speed up setup
+    #if [ -n "$src_modules" ]; then
+    #    echo "📦 Found node_modules in $src_modules. Copying..."
+    #    rsync -a --info=progress2 "$src_modules/" "$dir_name/node_modules/"
+    #fi
+    cd $dir_name
+    echo "✅ Done $dir_name"
+}
+
+# Internal function to remove worktree cleanly
+function __gw_rm() {
+    echo "🗑️ Removing worktree: $1..."
+    git worktree remove "$1"
+}
+
+# --- Aliases ---
+
+# gclwt: Clones a new repo with bare/worktree structure
+# Usage: gclwt <url> [folder-name]
 alias gclwt=__gclone_wt
+
+# gwco: Adds a new branch/worktree (and copies node_modules)
+# Usage: gwco <folder-name> [branch-source]
+alias gwco=__gw_co
+
+# gwrm: Removes a worktree
+# Usage: gwrm <folder-name>
+alias gwrm=__gw_rm
+
+# gwls: Lists active worktrees
+alias gwls='git worktree list'
